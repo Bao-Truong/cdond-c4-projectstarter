@@ -1,0 +1,7 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory 'c:/Users/Meep/OneDrive/Udacity/AWS-Devops/Project4_ML/DevOps_Microservices/BaoTG6_Submission_Container_ML_k8s'
+# Create python virtualenv & source it
+# source ~/.devops/bin/activate
+python3 -m venv ~/.devops
+make: Leaving directory 'c:/Users/Meep/OneDrive/Udacity/AWS-Devops/Project4_ML/DevOps_Microservices/BaoTG6_Submission_Container_ML_k8s'
+ 
