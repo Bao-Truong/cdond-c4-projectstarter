@@ -49,3 +49,47 @@ source .devops/bin/activate
 * Setup and Configure Kubernetes locally
 * Create Flask app in Container
 * Run via kubectl
+
+## Build then Upload Docker Image 
+**Build docker image:**
+```
+# Change the --tag value if you want to change the image name (default: app:latest)
+docker build --tag app:latest .
+```
+or use:
+```
+chmod +x ./run_docker.sh
+./run_docker.sh
+```
+**Upload docker image (to AWS ECR):**
+
+1. Manually create the ECR registry first by using the AWS Console.
+2. Update the dockerpath in the upload_docker.sh file according to the registry created in step 1.
+3. Update the 'aws ecr login cli'.
+4. (Optional) Change the docker --tag app:latest to be the same to the image building step.
+5. Run:
+```
+chmod +x upload_docker.sh
+./upload_docker.sh
+```
+## File Structure
+Folders:
+```
+├───.circleci:          Store the circleci config.yaml.
+├── deployment:         Store Kubernets resource yaml files.
+├───model_data:         CSV file data to train ML module.
+└───output_txt_files:   Include 2 output files while running run_docker.sh and run_kubernets.sh
+```
+Files:
+```
+├── app.py:             Flask Server code.
+├── Dockerfile:         Used to build Docker Image. (docker build --tag app:latest .)
+├── Makefile:           Run command using make cli.
+├── make_prediction.sh: Sample script to quickly test the server
+├── README.md
+├── requirements.txt:   Python Code dependencies
+├── run_docker.sh:      Run Flask Server as Docker
+├── run_kubernetes.sh:  Run Flask Server as Kubernetes Cluster
+└── upload_docker.sh:   Upload the built image into AWS ECR
+```
+
