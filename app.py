@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from flask.logging import create_logger
 import logging
 
+from time import strftime
+
+
 import pandas as pd
 from sklearn.externals import joblib
 from sklearn.preprocessing import StandardScaler
@@ -9,6 +12,11 @@ from sklearn.preprocessing import StandardScaler
 app = Flask(__name__)
 LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
+# LOG_HANDLER= logging.FileHandler("./output_txt_files/docker_out.txt")
+# LOG.addHandler(LOG_HANDLER)
+
+logging.basicConfig(filename='./output_txt_files/docker_out.txt', level=logging.INFO, format='[%(asctime)s] %(levelname)s %(name)s : %(message)s')
+
 
 def scale(payload):
     """Scales Payload"""
@@ -60,12 +68,22 @@ def predict():
     LOG.info(f"Inference payload DataFrame: \n{inference_payload}")
     # scale the input
     scaled_payload = scale(inference_payload)
+    LOG.info(f"Scaled Payload: {scaled_payload}")
+    
     # get an output prediction from the pretrained model, clf
     prediction = list(clf.predict(scaled_payload))
+    LOG.info(f"Prediction value: {prediction}")
+    
     # TO DO:  Log the output prediction value
     return jsonify({'prediction': prediction})
 
+# @app.after_request
+# def after_request(response):
+#     timestamp = strftime('[%Y-%b-%d %H:%M]')
+#     LOG.info('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+#     return response
+    
 if __name__ == "__main__":
     # load pretrained model as clf
     clf = joblib.load("./model_data/boston_housing_prediction.joblib")
-    app.run(host='0.0.0.0', port=80, debug=True) # specify port=80
+    app.run(host='0.0.0.0', port=8000, debug=True) # specify port=80
