@@ -1,3 +1,10 @@
+Port: 8000
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
+
 pod/app configured
 NAME   READY   STATUS    RESTARTS   AGE   IP          NODE         NOMINATED NODE   READINESS GATES
 app    1/1     Running   0          52s   10.40.0.1   kubenode01   <none>           <none>
