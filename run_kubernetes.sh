@@ -5,7 +5,7 @@ PORT=8000
 # Step 1:
 # This is your Docker ID/path
 # dockerpath=<>
-dockerpath="956722820961.dkr.ecr.us-east-2.amazonaws.com/udacity-container-ml:$TAG_VERSION"
+dockerpath="956722820961.dkr.ecr.us-east-2.amazonaws.com/udacity-container-ml:latest"
 
 # Step 2
 kubectl apply -f deployment/k8s/app_pod.yml
@@ -13,7 +13,7 @@ kubectl apply -f deployment/k8s/app_pod.yml
 
 
 # Step 3:
-kubectl get pod
+kubectl get pod -o wide
 # List kubernetes pods
 
 # Step 4:

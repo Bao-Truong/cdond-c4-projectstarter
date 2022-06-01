@@ -6,7 +6,7 @@
 # Step 1:
 # Create dockerpath
 # dockerpath=<your docker ID/path>
-dockerpath="956722820961.dkr.ecr.us-east-2.amazonaws.com/udacity-container-ml:$TAG_VERSION"
+dockerpath="956722820961.dkr.ecr.us-east-2.amazonaws.com/udacity-container-ml:latest"
 
 # Step 2:  
 # Authenticate & tag
